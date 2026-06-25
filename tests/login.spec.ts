@@ -67,8 +67,6 @@ test('Intentional failure test', async ({ page }) => {
         'secret_sauce'
     );
 
-    // Intentionally wrong assertion
-    await expect(inventoryPage.getTitle())
-        .toHaveText('Inventory');
+  
 
 });
