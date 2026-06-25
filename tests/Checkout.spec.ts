@@ -49,36 +49,3 @@ test('Complete order Successfully', async ({ page }) => {
 
 });
 
-test('Intentional failure during order confirmation', async ({ page }) => {
-
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
-    const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
-    const checkoutOverviewPage = new CheckoutOverviewPage(page);
-    const checkoutCompletePage = new CheckoutCompletePage(page);
-
-    await loginPage.navigate();
-
-    await loginPage.login('standard_user', 'secret_sauce');
-
-    await inventoryPage.addBackpackToCart();
-
-    await inventoryPage.clickCart();
-
-    await checkoutPage.clickCheckout();
-
-    await checkoutPage.enterFirstName('Yuvasree');
-    await checkoutPage.enterLastName('P');
-    await checkoutPage.enterPostalCode('641035');
-
-    await checkoutPage.clickContinue();
-
-    await checkoutOverviewPage.clickFinish();
-
-    // Intentionally wrong assertion
-    await expect(
-        checkoutCompletePage.getConfirmationMessage()
-    ).toHaveText('Order Completed Successfully');
-
-});
